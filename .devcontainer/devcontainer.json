@@ -1,0 +1,6 @@
+{
+  "name": "Group Project",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {},
+  "postCreateCommand": "echo 'Codespace Ready!'"
+}
