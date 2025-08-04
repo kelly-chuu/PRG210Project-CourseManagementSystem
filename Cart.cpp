@@ -11,8 +11,8 @@ int Cart::calcNumberCourses(){
     return numberCourses; //do i need this?
 }
 
-void Cart::addToCart(const Course c) { //do i need the const here
-    *(this + numberCourses) = c; //why error
+void Cart::addToCart(const Course& c) { //do i need the const here
+    selection[numberCourses] = c; //why error
     numberCourses++;
     totalCost = calcTotalCost();
 }
@@ -25,5 +25,5 @@ double Cart::calcTotalCost(){//check this pls
     return total;
 }
 Cart::Cart(){
-    
+    delete[] selection;
 }

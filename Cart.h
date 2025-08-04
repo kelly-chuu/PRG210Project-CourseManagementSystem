@@ -12,5 +12,5 @@ private:
     ~Cart();
 public:
     Cart();
-    void addToCart(const Course c);
+    void addToCart(const Course& c);
 };
