@@ -7,15 +7,23 @@ Cart::Cart(){
     totalCost = 0.0;
 }
 
-int calcNumberCourses(){
-    //return numberCourses; //what
+int Cart::calcNumberCourses(){
+    return numberCourses; //do i need this?
 }
 
-void addToCart(const Course c) { //do i need the const here
-    (this + numberCourses) = c;
+void Cart::addToCart(const Course c) { //do i need the const here
+    *(this + numberCourses) = c; //why error
     numberCourses++;
     totalCost = calcTotalCost();
 }
-double calcTotalCost(){
+double Cart::calcTotalCost(){//check this pls
+    double total = 0.0;
+    for (int i = 0; i< numberCourses; i++){
+        total+=selection[i].getPrice();
+    }
+    total *= 1.13;
+    return total;
+}
+Cart::Cart(){
     
 }

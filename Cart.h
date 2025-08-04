@@ -9,6 +9,7 @@ private:
     double totalCost;
     int calcNumberCourses();
     double calcTotalCost();
+    ~Cart();
 public:
     Cart();
     void addToCart(const Course c);
