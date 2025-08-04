@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 class Interface{
-public:
+protected:
     virtual void displayMenu(string question);
     virtual string getValidation(int choices, string question);
 };

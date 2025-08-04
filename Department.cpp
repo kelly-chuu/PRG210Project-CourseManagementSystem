@@ -1,26 +1,42 @@
 #include "Department.h"
 #include <cstring>
+#include <iostream>
 using namespace std;
 
-Department::Department(){
-    strncpy(name, "N/A", 4);
-    name[4] = '\0';
-    courses = new Course[100];
-    totalCourses = 0;
-}
-Department::Department(const char* deptName){
-    strncpy(name, deptName, strlen(deptName)+1);
-    name[strlen(deptName)+1] = '\0';
-    courses = new Course[100];
-    totalCourses = 0;
+/*Department::Department() : courses(nullptr), totalCourses(0) {
+    strcpy(name, "");
+}*/ //I don't think we need a default constructor, never make a department without a name
+
+Department::Department(const char* deptName) : courses(nullptr), totalCourses(0) {
+    strcpy(name, deptName);
 }
 Department::~Department(){
-
+    delete[] courses;
 }
 const char* Department::getName() const {
     return name;
 }
 
-void Department::addCourse(const Course& course){
-    
+
+void Department::addCourse(const Course& course) {
+    Course* temp = new Course[totalCourses + 1];
+    for (int i = 0; i < totalCourses; ++i) temp[i] = courses[i];
+    temp[totalCourses] = course;
+    delete[] courses;
+    courses = temp;
+    totalCourses++;
+}
+
+void Department::listCourses() const{
+    for (int i = 0; i<totalCourses;i++){
+        courses[i].display();
+    }
+}
+
+int Department::getTotalCourses() const{
+    return totalCourses;
+}
+
+Course* Department::getCourse(int index){
+    return &(courses[index]);
 }

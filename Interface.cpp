@@ -11,9 +11,18 @@ string Interface::getValidation(int choices, string question){
     while (true){
         displayMenu(question);
         cin >> input;
-        if (stoi(input) <= choices && stoi(input) >= 0) {
-            return input;
+        //do stoi(input) here and surround with try catch
+        try{
+            int inputInt = stoi(input);
+            if (inputInt <= choices && inputInt >= 0) {
+                return input;
+            }
         }
+        catch(const invalid_argument& e){
+            cout << "Invalid input!" <<endl;
+            continue;
+        }
+        
         cout << "Invalid input!" <<endl;
     }
     
