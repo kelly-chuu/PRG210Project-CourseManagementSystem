@@ -3,7 +3,7 @@ using namespace std;
 class Interface{
 protected:
     virtual void displayMenu(string question);
-    virtual string getValidation(int choices, string question);
+    virtual string getValidation(int choices, int min, string question);
 };
 
 /*prints the start menu ? (or in main)
