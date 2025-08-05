@@ -12,23 +12,23 @@ using namespace std;
 Department *StoreDepartments = nullptr;
 int TotalDepartments = 0;
 const char *csvFile = "/workspaces/PRG210Project-CourseManagementSystem/courses_extended.csv";
-
+void loadDepartmentsFromCSV(const char* filename);
 int main()
 {
-    TotalDepartments = 2;
-    StoreDepartments = new Department[TotalDepartments];
+    // TotalDepartments = 2;
+    // StoreDepartments = new Department[TotalDepartments];
 
-    // Department 1: "Math"
-    StoreDepartments[0] = Department("Math");
-    StoreDepartments[0].addCourse(Course("22", "physics", "M/W", 150.0));
-    StoreDepartments[0].addCourse(Course("23", "math", "M/W", 120.0));
+    // // Department 1: "Math"
+    // StoreDepartments[0] = Department("Math");
+    // StoreDepartments[0].addCourse(Course("22", "physics", "M/W", 150.0));
+    // StoreDepartments[0].addCourse(Course("23", "math", "M/W", 120.0));
 
-    // Department 2: "CS"
-    StoreDepartments[1] = Department("CS");
-    StoreDepartments[1].addCourse(Course("34", "Intro to Programming", "M/W", 200.0));
-    StoreDepartments[1].addCourse(Course("34", "Data Structures", "M/W", 220.0));
+    // // Department 2: "CS"
+    // StoreDepartments[1] = Department("CS");
+    // StoreDepartments[1].addCourse(Course("34", "Intro to Programming", "M/W", 200.0));
+    // StoreDepartments[1].addCourse(Course("34", "Data Structures", "M/W", 220.0));
 
-
+    loadDepartmentsFromCSV(csvFile);
 
     while (true)
     {
@@ -82,32 +82,32 @@ void loadDepartmentsFromCSV(const char* filename) { //this doesn't work yet
     TotalDepartments = stoi(line); //first line is the #departments
     StoreDepartments = new Department[TotalDepartments];
 
-    for (int i = 0; i < TotalDepartments; i++) {
+    for (int i = 0; i < TotalDepartments; i++) {//iterate departments
         // Read department name and course count
         getline(file, line);
-        std::stringstream ss(line);
-        std::string deptName, courseCountStr;
-        getline(ss, deptName, ',');
+        stringstream ss(line); //split line into parts
+        string deptName, courseCountStr;
+        getline(ss, deptName, ','); //first line gives dept name and total courses
         getline(ss, courseCountStr);
 
-        Department& dept = StoreDepartments[i];
-        dept.setName(deptName.c_str());
-        int numCourses = std::stoi(courseCountStr);
-        dept.setTotalCourses(numCourses);
+        StoreDepartments[i] = Department(deptName.c_str()); //add department (convert to char*)
+        int numCourses = stoi(courseCountStr);
 
-        for (int j = 0; j < numCourses; j++) {
+        for (int j = 0; j < numCourses; j++) { //add courses to department
+            //GET COURSE
             getline(file, line);
-            std::stringstream cs(line);
-            std::string courseName, schedule, priceStr;
+            stringstream cs(line); //ready for splitting
+            string courseName, schedule, priceStr;
+            getline(cs, courseName, ','); //get course name
+            getline(cs, schedule, ','); //get schedule
+            getline(cs, priceStr); //get price
 
-            getline(cs, courseName, ',');
-            getline(cs, schedule, ',');
-            getline(cs, priceStr);
-
-            double price = std::stod(priceStr);
-            Course course(courseName.c_str(), schedule.c_str(), price);
-            dept.addCourse(course); // Add this method to dynamically append courses
+            double price = stod(priceStr); //convert to double
+            //convention for course number
+            Course course((to_string(i)+"000"+to_string(j)).c_str(),courseName.c_str(), schedule.c_str(), price);
+            StoreDepartments[i].addCourse(course);
         }
+        //StoreDepartments[i].setTotalCourses(numCourses); //maybe don't need this
     }
 
     file.close(); //close the file

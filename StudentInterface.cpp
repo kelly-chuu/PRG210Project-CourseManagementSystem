@@ -43,7 +43,6 @@ StudentInterface::StudentInterface()
                 }
                 else if(answer == "1"){//list courses in cart
                     cart1.display();
-                    
                     continue;
                 }
                 else if(answer == "2"){ //checkout

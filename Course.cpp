@@ -42,5 +42,5 @@ const char* Course::getSchedule() const { return schedule; }
 double Course::getPrice() const { return price; }
 
 void Course::display() const {
-    std::cout << courseNumber << " - " << name << " (" << schedule << ") - $" << price << std::endl;
+    std::cout << std::string(courseNumber) << " - " << name << " (" << schedule << ") - $" << price << std::endl;
 }
