@@ -3,9 +3,9 @@
 #include <iostream>
 using namespace std;
 
-/*Department::Department() : courses(nullptr), totalCourses(0) {
+Department::Department() : courses(nullptr), totalCourses(0) {
     strcpy(name, "");
-}*/ //I don't think we need a default constructor, never make a department without a name
+}
 
 Department::Department(const char* deptName) : courses(nullptr), totalCourses(0) {
     strcpy(name, deptName);
