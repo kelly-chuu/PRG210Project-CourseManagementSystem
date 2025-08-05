@@ -7,10 +7,13 @@ private:
     string schedule[100];
     int numberCourses;
     double totalCost;
-    int calcNumberCourses();
-    double calcTotalCost();
-    ~Cart();
+    
 public:
     Cart();
     void addToCart(const Course& c);
+    ~Cart();
+    double calcTotalCost();
+    int calcNumberCourses();
+    void display();
+    void clear();
 };

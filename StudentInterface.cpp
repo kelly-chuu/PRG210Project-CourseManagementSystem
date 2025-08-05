@@ -1,4 +1,5 @@
 #include "Course.h"
+#include "Cart.h"
 #include "Interface.h"
 #include "StudentInterface.h"
 #include <iostream>
@@ -23,18 +24,34 @@ StudentInterface::StudentInterface()
                "Enter your choice [1,2]\n";
     menus[5] = "Enter course number to buy [0 to go back]\n"; // Buy course?
     // check this is correct
-    // displayMenu(menus[0]);
 
+    Cart cart1;
     while (true){
         string answer = getValidation(3, 1, menus[0]);
         if (answer == "3") { // MAIN MENU
             break;
-            delete this;
+            delete this; //might have to delete cart?
         }
         else if (answer == "1") { // show cart menu
             while (true){
                 answer = getValidation(3, 1, menus[1]);
-                if ()
+                if (answer == "3"){ //go to MAIN MENU
+                    break;
+                }
+                else if(answer == "1"){//list courses in cart
+                    cart1.display();
+                    continue;
+                }
+                else if(answer == "2"){ //checkout
+                    if(cart1.calcNumberCourses() ==0){
+                        cout << "No courses in cart" <<endl;
+                    }
+                    else {
+                        cout << "Thank you for your purchase"<<endl;
+                        
+                    }
+                }
+
             }
         }
         else if (answer == "2") { // Browse department menu
@@ -42,3 +59,5 @@ StudentInterface::StudentInterface()
         }
     }
 }
+//function for department verification?
+//should have a run() function to put that in
