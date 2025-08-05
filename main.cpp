@@ -34,6 +34,7 @@ int main()
 
     while (true)
     {
+        cout << "MAIN MENU" << endl;
         cout << "Select Role:\n";
         cout << "1. Student\n";
         cout << "2. Admin\n";
@@ -45,25 +46,25 @@ int main()
             cin >> input;
             if (input == "1" || input == "2" || input == "3")
             {
-                cout << "You chose option " << input << endl;
-                if (input == "3")
-                {
-                    cout << "Exiting program.\n";
-                    break;
-                }
-                else if (input == "1")
-                {
-                    Interface user = StudentInterface();
-                }
-                else if (input == "2")
-                {
-                    Interface user = AdminInterface();
-                }
+                break;
             }
             else
             {
                 cout << "Invalid output! <<endl";
             }
+        }
+        if (input == "3")
+        {
+            cout << "Exiting program.\n";
+            break;
+        }
+        else if (input == "1")
+        {
+            Interface user = StudentInterface();
+        }
+        else if (input == "2")
+        {
+            Interface user = AdminInterface();
         }
     }
     // Clean up
