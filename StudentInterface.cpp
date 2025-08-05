@@ -34,7 +34,6 @@ StudentInterface::StudentInterface()
         answer = getValidation(3, 1, menus[0]);
         if (answer == "3") { // MAIN MENU
             break;
-            delete this; //might have to delete cart?
         }
         else if (answer == "1") { // show cart menu -----------------
             while (true){
@@ -73,9 +72,22 @@ StudentInterface::StudentInterface()
                         }
                         while (true){ //go to Add to Cart
                             //display chosen department's courses
-                            //make function for this
+                            StoreDepartments[stoi(answer)+1].listCourses();
                             answer = getValidation(2,1,menus[4]);
-                            //last menu for buying course (aka adding to cart)
+                            if (answer == "2"){
+                                break;
+                            }
+                            else if(answer =="1"){
+                                answer = getValidation(StoreDepartments[stoi(answer)-1].getTotalCourses(),0,menus[5]);
+                                if (answer =="0"){
+                                    break;
+                                }
+                                //if valid course number, buy it
+                                Course temp = StoreDepartments[stoi(answer)-1].getCourse(stoi(answer)-1);
+                                cart1.addToCart(temp);
+                                cout <<"Added to cart"<< endl;
+                                break;
+                            }
                         }
                     }
                 }
@@ -90,3 +102,8 @@ void StudentInterface::listDepartments() {
         cout << i + 1 << ". " << StoreDepartments[i].getName() <<endl;
     }
 }
+// void StudentInterface::listCourses(Department d){
+//     for (int i = 0; i < TotalDepartments; ++i) {
+//         cout << i + 1 << ". " << StoreDepartments[i].getName() <<endl;
+//     }
+// }

@@ -18,7 +18,7 @@ public:
     void addCourse(const Course& course);
     void listCourses() const;
     int getTotalCourses() const;
-    Course* getCourse(int index);
+    Course getCourse(int index);
 };
 
 #endif

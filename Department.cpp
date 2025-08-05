@@ -29,6 +29,7 @@ void Department::addCourse(const Course& course) {
 
 void Department::listCourses() const{
     for (int i = 0; i<totalCourses;i++){
+        cout << i + 1 <<". ";
         courses[i].display();
     }
 }
@@ -37,6 +38,6 @@ int Department::getTotalCourses() const{
     return totalCourses;
 }
 
-Course* Department::getCourse(int index){
-    return &(courses[index]);
+Course Department::getCourse(int index){
+    return courses[index];
 }
