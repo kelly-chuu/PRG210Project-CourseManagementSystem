@@ -4,13 +4,14 @@
 #include "Interface.h"
 #include "Department.h"
 
-extern Department* SchoolDepartments;
+extern Department* StoreDepartments;
 extern int TotalDepartments;
 extern const char* csvFile;
 
 class AdminInterface : public Interface {
 public:
-    void showMainMenu() override;// allows user to loop through options 1-5
+    void showMainMenu();// allows user to loop through options 1-5
+    AdminInterface();
 
 private:
     void listDepartments();//current department names

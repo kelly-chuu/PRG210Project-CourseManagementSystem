@@ -1,6 +1,13 @@
 #include "Admin_Interface.h"
+#include "Interface.h"
 #include <fstream>
 #include <cstring>
+extern Department* StoreDepartments;
+extern int TotalDepartments;
+
+AdminInterface::AdminInterface(){
+    showMainMenu();
+}
 
 void AdminInterface::showMainMenu() {
     int choice;//will display admin menu selections 
@@ -11,7 +18,7 @@ void AdminInterface::showMainMenu() {
         std::cout << "3. Add Course to Department\n";
         std::cout << "4. Save Changes to CSV\n";
         std::cout << "5. Exit\n";
-        choice = getValidatedChoice(1, 5, "Enter your choice (1-5): ");
+        choice = stoi(getValidation(5, 1, "Enter your choice (1-5): \n"));
 
         if (choice == 1) listDepartments();
         else if (choice == 2) addDepartment();
@@ -23,7 +30,7 @@ void AdminInterface::showMainMenu() {
 // i'm printing all the departments for the safe side
 void AdminInterface::listDepartments() {
     for (int i = 0; i < TotalDepartments; ++i) {
-        std::cout << i + 1 << ". " << SchoolDepartments[i].getName() ;
+        std::cout << i + 1 << ". " << StoreDepartments[i].getName() <<endl;
     }
 }
 
@@ -40,11 +47,11 @@ void AdminInterface::addDepartment() {//adding a new department and using a poin
 
     Department* temp = new Department[TotalDepartments + 1];
     for (int i = 0; i < TotalDepartments; ++i)
-        temp[i] = SchoolDepartments[i];
+        temp[i] = StoreDepartments[i];
 
     temp[TotalDepartments] = Department(name.c_str());
-    delete[] SchoolDepartments;
-    SchoolDepartments = temp;
+    delete[] StoreDepartments;
+    StoreDepartments = temp;
     TotalDepartments++;
 
     std::cout << "Department added.\n";
@@ -52,10 +59,10 @@ void AdminInterface::addDepartment() {//adding a new department and using a poin
 //ask user to add a course to a department with full input 
 void AdminInterface::addCourseToDepartment() {
     listDepartments();
-    int choice = getValidatedChoice(0, TotalDepartments, "Enter department number (0 will take you back) ");
+    int choice = stoi(getValidation(TotalDepartments, 0, "Enter department number (0 will take you back) "));
     if (choice == 0) return;
 
-    Department& dept = SchoolDepartments[choice - 1];
+    Department& dept = StoreDepartments[choice - 1];
     std::cin.ignore();
 
     // after choosing the department the user can enter the info for new courses
@@ -87,10 +94,9 @@ void AdminInterface::addCourseToDepartment() {
     }
 
     dept.addCourse(Course(crsnum.c_str(), crsname.c_str(), sched.c_str(), price));
-    std::cout <<  "The course has been added";
+    std::cout <<  "The course has been added" <<endl;
 }
 //save data to csv file
 void AdminInterface::saveChangesToCSV() {
-    std::cout << "changes are saved.
-        ";
+    std::cout << "changes are saved.";
 }

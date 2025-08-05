@@ -2,10 +2,15 @@
 #include "Course.h"
 #include "Cart.h"
 #include "StudentInterface.h"
+#include "Admin_Interface.h"
 #include<iostream>
+#include <fstream>
+#include <sstream>
+#include <cstring>
 using namespace std;
 Department* StoreDepartments = nullptr;
 int TotalDepartments = 0;
+const char * csvFile = "/workspaces/PRG210Project-CourseManagementSystem/courses_extended.csv";
 
 int main(){
     TotalDepartments = 2;
@@ -22,8 +27,8 @@ int main(){
     StoreDepartments[1].addCourse(Course("34","Data Structures", "M/W", 220.0));
 
     // Launch student interface (if you have a class for it)
-    StudentInterface s;
-
+    //StudentInterface s;
+    AdminInterface a;
     // Clean up
     delete[] StoreDepartments;
     return 0;

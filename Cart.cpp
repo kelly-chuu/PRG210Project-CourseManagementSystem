@@ -39,6 +39,8 @@ void Cart::display(){
         for (int i= 0; i<numberCourses;i++){
             selection[i].display();
         }
+        cout << "Total courses: "<< numberCourses <<endl;
+        cout << "Total cost: " <<totalCost<<endl;
     }
 }
 

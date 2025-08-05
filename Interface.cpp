@@ -19,7 +19,7 @@ string Interface::getValidation(int choices, int min, string question){
             }
         }
         catch(const invalid_argument& e){
-            cout << "Invalid input!" <<endl;
+            cout << "Invalid input! Not int" <<endl;
             continue;
         }
         
