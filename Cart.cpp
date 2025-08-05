@@ -2,7 +2,7 @@
 #include "Cart.h"
 using namespace std;
 #include "Course.h"
-
+#include <iomanip>
 Cart::Cart(){
     selection = new Course[100];
     //schedule remains empty
@@ -39,6 +39,7 @@ void Cart::display(){
         for (int i= 0; i<numberCourses;i++){
             selection[i].display();
         }
+        cout << fixed << setprecision(2);
         cout << "Total courses: "<< numberCourses <<endl;
         cout << "Total cost: " <<totalCost<<endl;
     }

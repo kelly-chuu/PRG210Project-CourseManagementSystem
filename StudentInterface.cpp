@@ -67,6 +67,7 @@ StudentInterface::StudentInterface()
                     while (true){
                         listDepartments(); //list departments
                         answer = getValidation(TotalDepartments,0,menus[3]);
+                        string dept = answer;
                         if (answer =="0"){ //return to Browse Departments
                             break;
                         }
@@ -78,7 +79,7 @@ StudentInterface::StudentInterface()
                                 break;
                             }
                             else if(answer =="1"){
-                                answer = getValidation(StoreDepartments[stoi(answer)-1].getTotalCourses(),0,menus[5]);
+                                answer = getValidation(StoreDepartments[stoi(dept)-1].getTotalCourses(),0,menus[5]);
                                 if (answer =="0"){
                                     break;
                                 }

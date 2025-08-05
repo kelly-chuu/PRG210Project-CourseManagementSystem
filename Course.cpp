@@ -1,5 +1,5 @@
 #include "Course.h"
-
+#include <iomanip>
 Course::Course() : price(0.0) {
     name = new char[1];
     name[0] = '\0'; 
@@ -44,5 +44,6 @@ const char* Course::getSchedule() const { return schedule; }
 double Course::getPrice() const { return price; }
 
 void Course::display() const {
+    std::cout << std::fixed << std::setprecision(2);
     std::cout << std::string(courseNumber) << " - " << name << " (" << schedule << ") - $" << price << std::endl;
 }
