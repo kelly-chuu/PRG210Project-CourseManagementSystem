@@ -16,7 +16,9 @@ Department::~Department(){
 const char* Department::getName() const {
     return name;
 }
-
+void Department::setTotalCourses(int num){
+    totalCourses = num;
+}
 
 void Department::addCourse(const Course& course) {
     Course* temp = new Course[totalCourses + 1];
