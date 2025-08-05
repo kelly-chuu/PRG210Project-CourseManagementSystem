@@ -98,5 +98,27 @@ void AdminInterface::addCourseToDepartment() {
 }
 //save data to csv file
 void AdminInterface::saveChangesToCSV() {
-    std::cout << "changes are saved.";
+    std::cout << "changes are saved." <<endl;
+    std::ofstream outFile(csvFile); // csvFile is assumed to be defined externally
+    if (!outFile) {
+        std::cerr << "Error: Unable to open CSV file for writing." << std::endl;
+        return;
+    }
+
+    outFile << TotalDepartments << std::endl;
+
+    for (int i = 0; i < TotalDepartments; ++i) {
+        Department& dept = StoreDepartments[i];
+        outFile << dept.getName() << ", " << dept.getTotalCourses() << std::endl;
+
+        for (int j = 0; j < dept.getTotalCourses(); ++j) {
+            Course course = dept.getCourse(j);
+            outFile << course.getName() << ", " 
+                    << course.getSchedule() << ", " 
+                    << course.getPrice() << std::endl;
+        }
+    }
+
+    outFile.close();
+    std::cout << "Changes saved to CSV successfully." << std::endl;
 }
