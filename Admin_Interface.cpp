@@ -99,7 +99,7 @@ void AdminInterface::addCourseToDepartment() {
 //save data to csv file
 void AdminInterface::saveChangesToCSV() {
     std::cout << "changes are saved." <<endl;
-    std::ofstream outFile(csvFile); // csvFile is assumed to be defined externally
+    std::ofstream outFile(csvFile); 
     if (!outFile) {
         std::cerr << "Error: Unable to open CSV file for writing." << std::endl;
         return;
