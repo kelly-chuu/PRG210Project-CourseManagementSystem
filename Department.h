@@ -13,6 +13,8 @@ public:
     Department();
     Department(const char* deptName);
     ~Department();
+    Department(const Department& other);
+    Department& operator=(const Department& other);
     void setTotalCourses(int num);
     const char* getName() const;
     void addCourse(const Course& course);

@@ -13,6 +13,38 @@ Department::Department(const char* deptName) : courses(nullptr), totalCourses(0)
 Department::~Department(){
     delete[] courses;
 }
+Department::Department(const Department& other) {
+    strcpy(name, other.name);
+    totalCourses = other.totalCourses;
+
+    if (totalCourses > 0) {
+        courses = new Course[totalCourses];
+        for (int i = 0; i < totalCourses; ++i) {
+            courses[i] = other.courses[i]; // relies on Course copy constructor
+        }
+    } else {
+        courses = nullptr;
+    }
+}
+
+Department& Department::operator=(const Department& other) {
+    if (this != &other) {
+        delete[] courses;
+
+        strcpy(name, other.name);
+        totalCourses = other.totalCourses;
+
+        if (totalCourses > 0) {
+            courses = new Course[totalCourses];
+            for (int i = 0; i < totalCourses; ++i) {
+                courses[i] = other.courses[i]; // relies on Course operator=
+            }
+        } else {
+            courses = nullptr;
+        }
+    }
+    return *this;
+}
 const char* Department::getName() const {
     return name;
 }
