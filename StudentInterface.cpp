@@ -84,7 +84,7 @@ StudentInterface::StudentInterface()
                                     break;
                                 }
                                 //if valid course number, buy it
-                                Course temp = StoreDepartments[stoi(answer)-1].getCourse(stoi(answer)-1);
+                                Course temp = StoreDepartments[stoi(dept)-1].getCourse(stoi(answer)-1);
                                 cart1.addToCart(temp);
                                 cout <<"Added to cart"<< endl;
                                 break;
