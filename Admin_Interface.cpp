@@ -4,6 +4,7 @@
 #include <cstring>
 extern Department* StoreDepartments;
 extern int TotalDepartments;
+extern const char* csvFile;
 
 AdminInterface::AdminInterface(){
     showMainMenu();
@@ -98,27 +99,24 @@ void AdminInterface::addCourseToDepartment() {
 }
 //save data to csv file
 void AdminInterface::saveChangesToCSV() {
-    std::cout << "changes are saved." <<endl;
-    std::ofstream outFile(csvFile); 
-    if (!outFile) {
+    std::ofstream outFile(csvFile); //call the file for writing outFile
+    if (!outFile) { //if path is wrong
         std::cerr << "Error: Unable to open CSV file for writing." << std::endl;
         return;
     }
 
-    outFile << TotalDepartments << std::endl;
+    outFile << TotalDepartments << std::endl; //puts #departments at the top
 
-    for (int i = 0; i < TotalDepartments; ++i) {
-        Department& dept = StoreDepartments[i];
+    for (int i = 0; i < TotalDepartments; ++i) { //for each department
+        Department& dept = StoreDepartments[i]; //for easier access
         outFile << dept.getName() << ", " << dept.getTotalCourses() << std::endl;
-
-        for (int j = 0; j < dept.getTotalCourses(); ++j) {
-            Course course = dept.getCourse(j);
-            outFile << course.getName() << ", " 
-                    << course.getSchedule() << ", " 
+        for (int j = 0; j < dept.getTotalCourses(); ++j) {//write each course
+            Course course = dept.getCourse(j); //iterate through department
+            outFile << course.getName() << "," 
+                    << course.getSchedule() << "," 
                     << course.getPrice() << std::endl;
         }
     }
-
-    outFile.close();
+    outFile.close(); //close the file
     std::cout << "Changes saved to CSV successfully." << std::endl;
 }

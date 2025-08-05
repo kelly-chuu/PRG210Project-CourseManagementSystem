@@ -28,9 +28,7 @@ int main()
     StoreDepartments[1].addCourse(Course("34", "Intro to Programming", "M/W", 200.0));
     StoreDepartments[1].addCourse(Course("34", "Data Structures", "M/W", 220.0));
 
-    // Launch student interface
-    // StudentInterface s;
-    // AdminInterface a;
+
 
     while (true)
     {
@@ -60,11 +58,11 @@ int main()
         }
         else if (input == "1")
         {
-            Interface user = StudentInterface();
+            Interface* user = new StudentInterface(); //polymorphism!
         }
         else if (input == "2")
         {
-            Interface user = AdminInterface();
+            Interface* user = new AdminInterface();
         }
     }
     // Clean up
@@ -72,45 +70,45 @@ int main()
     return 0;
 }
 
-// void loadDepartmentsFromCSV(const char* filename) { //this doesn't work yet
-//     std::ifstream file(filename);
-//     if (!file.is_open()) {
-//         std::cout << "Failed to open file: " << filename << std::endl;
-//         return;
-//     }
+void loadDepartmentsFromCSV(const char* filename) { //this doesn't work yet
+    ifstream file(filename); //opens file for reading
+    if (!file.is_open()) {
+        std::cout << "Failed to open file: " << filename << std::endl;
+        return; //doesn't continue
+    }
 
-//     std::string line;
-//     getline(file, line);
-//     TotalDepartments = std::stoi(line);
-//     StoreDepartments = new Department[TotalDepartments];
+    string line;
+    getline(file, line);
+    TotalDepartments = stoi(line); //first line is the #departments
+    StoreDepartments = new Department[TotalDepartments];
 
-//     for (int i = 0; i < TotalDepartments; i++) {
-//         // Read department name and course count
-//         getline(file, line);
-//         std::stringstream ss(line);
-//         std::string deptName, courseCountStr;
-//         getline(ss, deptName, ',');
-//         getline(ss, courseCountStr);
+    for (int i = 0; i < TotalDepartments; i++) {
+        // Read department name and course count
+        getline(file, line);
+        std::stringstream ss(line);
+        std::string deptName, courseCountStr;
+        getline(ss, deptName, ',');
+        getline(ss, courseCountStr);
 
-//         Department& dept = StoreDepartments[i];
-//         dept.setName(deptName.c_str());
-//         int numCourses = std::stoi(courseCountStr);
-//         dept.setTotalCourses(numCourses);
+        Department& dept = StoreDepartments[i];
+        dept.setName(deptName.c_str());
+        int numCourses = std::stoi(courseCountStr);
+        dept.setTotalCourses(numCourses);
 
-//         for (int j = 0; j < numCourses; j++) {
-//             getline(file, line);
-//             std::stringstream cs(line);
-//             std::string courseName, schedule, priceStr;
+        for (int j = 0; j < numCourses; j++) {
+            getline(file, line);
+            std::stringstream cs(line);
+            std::string courseName, schedule, priceStr;
 
-//             getline(cs, courseName, ',');
-//             getline(cs, schedule, ',');
-//             getline(cs, priceStr);
+            getline(cs, courseName, ',');
+            getline(cs, schedule, ',');
+            getline(cs, priceStr);
 
-//             double price = std::stod(priceStr);
-//             Course course(courseName.c_str(), schedule.c_str(), price);
-//             dept.addCourse(course); // Add this method to dynamically append courses
-//         }
-//     }
+            double price = std::stod(priceStr);
+            Course course(courseName.c_str(), schedule.c_str(), price);
+            dept.addCourse(course); // Add this method to dynamically append courses
+        }
+    }
 
-//     file.close();
-// }
+    file.close(); //close the file
+}
