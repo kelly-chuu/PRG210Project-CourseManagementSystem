@@ -1,0 +1,96 @@
+#include "Admin_Interface.h"
+#include <fstream>
+#include <cstring>
+
+void AdminInterface::showMainMenu() {
+    int choice;//will display admin menu selections 
+    do {
+        std::cout << "\n Admin Menu\n";
+        std::cout << "1. List Departments\n";
+        std::cout << "2. Add Department\n";
+        std::cout << "3. Add Course to Department\n";
+        std::cout << "4. Save Changes to CSV\n";
+        std::cout << "5. Exit\n";
+        choice = getValidatedChoice(1, 5, "Enter your choice (1-5): ");
+
+        if (choice == 1) listDepartments();
+        else if (choice == 2) addDepartment();
+        else if (choice == 3) addCourseToDepartment();
+        else if (choice == 4) saveChangesToCSV();
+
+    } while (choice != 5);
+}
+// i'm printing all the departments for the safe side
+void AdminInterface::listDepartments() {
+    for (int i = 0; i < TotalDepartments; ++i) {
+        std::cout << i + 1 << ". " << SchoolDepartments[i].getName() ;
+    }
+}
+
+void AdminInterface::addDepartment() {//adding a new department and using a pointer to change the department array size if needed? do i really
+    std::cin.ignore();
+    std::string name;
+    std::cout << "Enter department name: ";
+    std::getline(std::cin, name);
+
+    if (name.empty()) {
+        std::cout << "invalid input!!!";
+        return;
+    }
+
+    Department* temp = new Department[TotalDepartments + 1];
+    for (int i = 0; i < TotalDepartments; ++i)
+        temp[i] = SchoolDepartments[i];
+
+    temp[TotalDepartments] = Department(name.c_str());
+    delete[] SchoolDepartments;
+    SchoolDepartments = temp;
+    TotalDepartments++;
+
+    std::cout << "Department added.\n";
+}
+//ask user to add a course to a department with full input 
+void AdminInterface::addCourseToDepartment() {
+    listDepartments();
+    int choice = getValidatedChoice(0, TotalDepartments, "Enter department number (0 will take you back) ");
+    if (choice == 0) return;
+
+    Department& dept = SchoolDepartments[choice - 1];
+    std::cin.ignore();
+
+    // after choosing the department the user can enter the info for new courses
+    std::string crsnum, crsname, sched;
+    double price;
+
+    std::cout << "Enter course number: ";
+    std::getline(std::cin, crsnum);
+    while (crsnum.empty()) {
+        std::cout << "Invalid!!Try again ";
+        std::getline(std::cin, crsnum);
+    }
+
+    std::cout << "Enter course name: ";
+    std::getline(std::cin, crsname);
+
+    std::cout << "Enter schedule (M/W, T/R, W/F): ";
+    std::getline(std::cin, sched);
+    while (sched != "M/W" && sched != "T/R" && sched != "W/F") {
+        std::cout << "Invalid!!Try again ";
+        std::getline(std::cin, sched);
+    }
+
+    std::cout << "Enter course price: ";
+    while (!(std::cin >> price) || price <= 0) {
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+        std::cout << "Invalid!! Try again ";
+    }
+
+    dept.addCourse(Course(crsnum.c_str(), crsname.c_str(), sched.c_str(), price));
+    std::cout <<  "The course has been added";
+}
+//save data to csv file
+void AdminInterface::saveChangesToCSV() {
+    std::cout << "changes are saved.
+        ";
+}

@@ -8,6 +8,7 @@ private:
     
 public:
     StudentInterface();
+    void listDepartments(); 
 };
 
 /*have a function just for displaying the menu.
