@@ -109,7 +109,7 @@ void AdminInterface::saveChangesToCSV() {
 
     for (int i = 0; i < TotalDepartments; ++i) { //for each department
         Department& dept = StoreDepartments[i]; //for easier access
-        outFile << dept.getName() << ", " << dept.getTotalCourses() << std::endl;
+        outFile << dept.getName() << "," << dept.getTotalCourses() << std::endl;
         for (int j = 0; j < dept.getTotalCourses(); ++j) {//write each course
             Course course = dept.getCourse(j); //iterate through department
             outFile << course.getName() << "," 

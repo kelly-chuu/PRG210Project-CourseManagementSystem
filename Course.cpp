@@ -1,6 +1,8 @@
 #include "Course.h"
 
-Course::Course() : name(nullptr), price(0.0) {
+Course::Course() : price(0.0) {
+    name = new char[1];
+    name[0] = '\0'; 
     strcpy(courseNumber, "");
     strcpy(schedule, "");
 }
