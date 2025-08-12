@@ -73,13 +73,13 @@ StudentInterface::StudentInterface()
                         }
                         while (true){ //go to Add to Cart
                             //display chosen department's courses
-                            StoreDepartments[stoi(answer)-1].listCourses();
+                            StoreDepartments[stoi(dept)-1].listCourses();
                             answer = getValidation(2,1,menus[4]);
                             if (answer == "2"){
                                 break;
                             }
                             else if(answer =="1"){
-                                answer = getValidation(StoreDepartments[stoi(dept)-1].getTotalCourses(),0,menus[5]);
+                                answer = getValidation(StoreDepartments[stoi(dept)-1].getTotalCourses(),0,menus[5]); //list courses in dept
                                 if (answer =="0"){
                                     break;
                                 }

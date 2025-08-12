@@ -35,7 +35,8 @@ void AdminInterface::listDepartments() {
     }
 }
 
-void AdminInterface::addDepartment() {//adding a new department and using a pointer to change the department array size if needed? do i really
+void AdminInterface::addDepartment() {//adding a new department and using a pointer to change the department array size 
+    //if needed? do i really need it
     std::cin.ignore();
     std::string name;
     std::cout << "Enter department name: ";
@@ -46,7 +47,8 @@ void AdminInterface::addDepartment() {//adding a new department and using a poin
         return;
     }
 
-    Department* temp = new Department[TotalDepartments + 1];
+    Department* temp = new Department[TotalDepartments + 1];// craeting temp pointer to point an array of dept.obj and
+    // create an array bigger than current
     for (int i = 0; i < TotalDepartments; ++i)
         temp[i] = StoreDepartments[i];
 

@@ -80,6 +80,7 @@ void loadDepartmentsFromCSV(const char* filename) { //this doesn't work yet
     string line;
     getline(file, line);
     TotalDepartments = stoi(line); //first line is the #departments
+    cout << "working line";
     StoreDepartments = new Department[TotalDepartments];
 
     for (int i = 0; i < TotalDepartments; i++) {//iterate departments
@@ -91,8 +92,8 @@ void loadDepartmentsFromCSV(const char* filename) { //this doesn't work yet
         getline(ss, courseCountStr);
 
         StoreDepartments[i] = Department(deptName.c_str()); //add department (convert to char*)
+        
         int numCourses = stoi(courseCountStr);
-
         for (int j = 0; j < numCourses; j++) { //add courses to department
             //GET COURSE
             getline(file, line);
